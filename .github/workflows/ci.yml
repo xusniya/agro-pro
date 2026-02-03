@@ -49,6 +49,17 @@ jobs:
         run: |
           ruff check .
 
+      - name: 🔎 Debug Django paths
+        run: |
+          pwd
+          ls -la
+          echo "---- settings.py ----"
+          find . -maxdepth 4 -type f -name "settings.py" -print
+          echo "---- manage.py ----"
+          find . -maxdepth 4 -type f -name "manage.py" -print
+          echo "---- python path ----"
+          python -c "import sys; print('\n'.join(sys.path))"
+          
       - name: 🗄 Run migrations
         run: |
           python manage.py migrate
@@ -69,9 +80,4 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/agriculture:latest
-      - name: 🔎 Debug Django project module
-        run: |
-          pwd
-          ls -la
-          find . -maxdepth 3 -type f -name "settings.py" -print
-          find . -maxdepth 3 -type f -name "manage.py" -print
+     
