@@ -1,0 +1,20 @@
+python manage.py startapp myappname
+
+docker compose up --build
+
+docker tag xusniya-django:latest xusniya/agro-pro:latest
+docker push xusniya/agro-pro:latest
+
+helm template agriculture
+helm install agriculture ./agriculture
+
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+
+
+
+
+❯ echo $KUBECONFIG
+/etc/rancher/k3s/k3s.yaml
+
+kubectl get applications -n default
